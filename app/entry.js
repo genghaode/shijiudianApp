@@ -1,10 +1,34 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { Provider } from 'react-redux'
+import { App } from './app'
+import { init } from 'domain/redux/init'
 
-export const Entry = () => {
-  return (
-    <View>
-			<Text>hello world</Text>
-		</View>
-  )
+export class Entry extends Component {
+  constructor() {
+    super()
+    this.state = {
+      store: null
+    }
+  }
+  componentDidMount() {
+    init().then(__store => {
+      global.store = __store
+      setTimeout(() => {
+        this.setState({ store: __store })
+      })
+    }).catch((e) => {
+      console.log(e)
+    })
+  }
+  render() {
+    const { store } = this.state
+    if (!store) {
+      return null
+    }
+    return (
+      <Provider store={store}>
+        <App />
+      </Provider>
+    )
+  }
 }

@@ -1,0 +1,14 @@
+const initialState = {
+  error: false
+}
+
+export const network = (state = initialState, action) => {
+  switch (action.type) {
+    case 'NETWORK_ERROR':
+      return { error: true, cache: action.cache }
+    case 'NETWORK_RETRY':
+      return { error: false }
+    default:
+      return state
+  }
+}
