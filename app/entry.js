@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import { App } from './app'
 import { init } from 'domain/redux/init'
+import 'domain/def/global.func.def'
 
 export class Entry extends Component {
   constructor() {

@@ -1,4 +1,4 @@
-import Toast from 'react-native-toast'
+import Toast from '@remobile/react-native-toast'
 
 global.asset_request = (json) => {
   if (json.code == 1000) {
