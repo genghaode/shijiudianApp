@@ -21,7 +21,7 @@ class _App extends Component {
       const routes = navigator.getCurrentRoutes()
       if (routes.length === 1) {
         if (!this.nextTimeExit) {
-          console.log('再按一次退出')
+          alert('再按一次退出')
           this.nextTimeExit = true
           setTimeout(() => {
             this.nextTimeExit = false
