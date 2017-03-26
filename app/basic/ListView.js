@@ -39,8 +39,8 @@ export class ListView extends Component {
     renderBottomIndicator: () => {
       return (
         <View style={{height: 42, ...flexCenter}}>
-					<ActivityIndicator />
-				</View>
+          <ActivityIndicator />
+        </View>
       )
     }
   }
@@ -54,7 +54,7 @@ export class ListView extends Component {
     }
   }
 
-  ComponentDidMount() {
+  componentDidMount() {
     this.append(this.props.initialData)
   }
 
@@ -77,7 +77,6 @@ export class ListView extends Component {
         })
       }
     }, 100)
-    console.log(nList)
     this.setState({
       data: [...this.state.data, ...nList],
       newlyAdded: nList,
@@ -113,23 +112,22 @@ export class ListView extends Component {
         ...newlyAdded.filter(x => !visibleData.find(t => t.id === x.id))
       ]
     }
-    console.log(this.props.refreshControl)
 
     return (
       <ScrollView
-    		onLayout={(e)=>this._layout(e)}
-    		onScroll={(e)=>this._scroll(e)}
-    		onResponderRelease={(e)=>this._scrollRelease(e)}
-    		scrollEventThrottle={200}
-    		refreshControl={this.props.refreshControl}
-    	>
-    		<View style={{height: H1}}></View>
-    		{
-    			visibleData.map((item)=>this._renderItem(item))
-    		}
-    		<View style={{height: H3}}></View>
-    		{this.props.renderBottomIndicator()}
-    	</ScrollView>
+        onLayout={(e)=>this._layout(e)}
+        onScroll={(e)=>this._scroll(e)}
+        onResponderRelease={(e)=>this._scrollRelease(e)}
+        scrollEventThrottle={200}
+        refreshControl={this.props.refreshControl}
+      >
+        <View style={{height: H1}}></View>
+        {
+          visibleData.map((item)=>this._renderItem(item))
+        }
+        <View style={{height: H3}}></View>
+        {this.props.renderBottomIndicator()}
+      </ScrollView>
     )
   }
 
@@ -156,8 +154,8 @@ export class ListView extends Component {
   _renderItem({ item, id }) {
     return (
       <View key={id} onLayout={(e)=>this._itemLayout(e, id)}>
-  			{this.props.renderItem(item, id)}
-  		</View>
+        {this.props.renderItem(item, id)}
+      </View>
     )
   }
 
