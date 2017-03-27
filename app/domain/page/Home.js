@@ -4,7 +4,7 @@ import Swiper from 'react-native-swiper'
 import { Routes } from 'domain/page'
 import { ItemCard } from 'domain/component'
 import { flexCenter, ListView } from 'basic'
-import { H, W } from 'domain/def'
+import { H, W, OS } from 'domain/def'
 
 
 export class Home extends Component {
@@ -37,7 +37,6 @@ export class Home extends Component {
           resolve()
         }, 2000)
       })
-
       this.itemList = [...this.itemList, ...res.data.itemList]
       this.start = this.start + res.data.itemList.length
       this.hasMore = this.itemList.length < res.data.total + 1
@@ -47,7 +46,9 @@ export class Home extends Component {
         this.refs.listView.append(res.data.itemList)
       })
 
-    } catch (e) {} finally {
+    } catch (e) {
+      console.log(e)
+    } finally {
       if (this.hasMore) {
         this.loading = false
       }
@@ -66,7 +67,7 @@ export class Home extends Component {
     }
 
     return (
-      <View style={{marginBottom: 48}}>
+      <View style={{flex: 1,marginBottom: OS==='ios'?58:78}}>
         <ListView
           ref="listView"
           initialData={[null]}
@@ -116,16 +117,15 @@ export class Home extends Component {
     }
     if (!this.hasMore) {
       return (
-        <View style={{height: 42, ...flexCenter}}>
+        <View style={{height: 48, ...flexCenter}}>
           <Text>没有更多了</Text>
         </View>
       )
     }
     return (
-      <View style={{height: 42, ...flexCenter}}>
-        {
-          this.loading ? <Text>正在加载...</Text> : <ActivityIndicator />
-        }
+      <View style={{height: 48, flexDirection: 'row', ...flexCenter}}>
+        <ActivityIndicator />
+        <Text> 正在加载...</Text>
       </View>
     )
   }
@@ -133,6 +133,7 @@ export class Home extends Component {
     this.start = 0
     this.hasMore = false
     this.itemList = [null]
+    this.loading = false
     this.loadList().then(() => {
       this.refs.listView.reset(this.itemList)
     })

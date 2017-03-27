@@ -13,7 +13,7 @@ class _App extends Component {
   }
 
   componentDidMount() {
-    BackAndroid.addEventListener('hardwareBackPree', () => {
+    BackAndroid.addEventListener('hardwareBackPress', () => {
       const navigator = this.refs.navigator
       if (!navigator) {
         return false
@@ -25,8 +25,8 @@ class _App extends Component {
           this.nextTimeExit = true
           setTimeout(() => {
             this.nextTimeExit = false
-          }, 5000)
-          return false
+          }, 3000)
+          return true
         }
         return false
       } else if (routes.length > 1) {
@@ -39,26 +39,26 @@ class _App extends Component {
     const { network, active } = this.props
     return (
       <View style={{flex: 1}}>
-				<Navigator 
-					ref="navigator" 
-					initialRoute={Routes.Tabs}
-					renderScene={(route, navigator) =>this._renderScene(route, navigator, this.props.active)}
-					navigationBar={this._renderNavBar(active)}
-				/>
-			</View>
+        <Navigator 
+          ref="navigator" 
+          initialRoute={Routes.Tabs}
+          renderScene={(route, navigator) =>this._renderScene(route, navigator, this.props.active)}
+          navigationBar={this._renderNavBar(active)}
+        />
+      </View>
     )
   }
   _renderScene(route, navigator, active) {
     const { Comp } = route
     return (
       <View style={{flex: 1, backgroundColor: 'white'}}>
-  			<StatusBar barStyle={route.Inverse ? 'light-content' : 'default'} />
-  			{
-  				((route.name ==='Tabs' && route.Title[active]) || (route.name !=='Tabs' && route.Title)) &&  
-  				<View style={{backgroundColor: route.Inverse ? COLOR_NAV_DARK : 'white', height: OS === 'ios' ? 64 : 56}}></View>
-  			}
-  			<Comp navigator={navigator} route={route} />
-  		</View>
+        <StatusBar barStyle={route.Inverse ? 'light-content' : 'default'} />
+        {
+          ((route.name ==='Tabs' && route.Title[active]) || (route.name !=='Tabs' && route.Title)) &&  
+          <View style={{backgroundColor: route.Inverse ? COLOR_NAV_DARK : 'white', height: OS === 'ios' ? 64 : 56}}></View>
+        }
+        <Comp navigator={navigator} route={route} />
+      </View>
     )
   }
   _renderNavBar(active) {
@@ -81,11 +81,6 @@ class _App extends Component {
         const t_style = {...titleStyle }
         if (OS === 'android') {
           t_style.width = W - 148
-        }
-        if (route.name === 'Tabs') {
-
-        } else {
-
         }
         return ((route.name === 'Tabs' && route.Title[active]) || (route.name !== 'Tabs' && route.Title)) && (
           <View style={{...t_style}}>
