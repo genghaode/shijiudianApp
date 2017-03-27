@@ -3,6 +3,7 @@ import { Provider } from 'react-redux'
 import { App } from './app'
 import { init } from 'domain/redux/init'
 import 'domain/def/global.func.def'
+import { get_token } from 'domain/api/apis'
 
 export class Entry extends Component {
   constructor() {
@@ -14,8 +15,10 @@ export class Entry extends Component {
   componentDidMount() {
     init().then(__store => {
       global.store = __store
-      setTimeout(() => {
-        this.setState({ store: __store })
+      get_token().then(() => {
+        setTimeout(() => {
+          this.setState({ store: __store })
+        })
       })
     }).catch((e) => {
       console.log(e)

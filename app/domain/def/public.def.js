@@ -22,3 +22,6 @@ export const OS = Platform.OS
 // 宽高信息
 export const W = Dimensions.get('window').width
 export const H = Dimensions.get('window').height
+
+// 请求地址
+export const SERVICE_BASE = 'http://127.0.0.1:3000'

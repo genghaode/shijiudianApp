@@ -20,7 +20,7 @@ export const init = async() => {
     applyMiddleware(thunk, track)
   )(createStore)(reducer)
   return new Promise((resolve, reject) => {
-    const blacklist = ['network', 'tab', 'user']
+    const blacklist = ['network', 'tab']
     const storage = AsyncStorage
     persistStore(store, { blacklist, storage }, () => {
       resolve(store)

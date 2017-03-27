@@ -5,7 +5,7 @@ import { Routes } from 'domain/page'
 import { ItemCard } from 'domain/component'
 import { flexCenter, ListView } from 'basic'
 import { H, W, OS } from 'domain/def'
-
+import { get_itemList } from 'domain/api/apis'
 
 export class Home extends Component {
   constructor() {
@@ -30,6 +30,7 @@ export class Home extends Component {
 
     try {
       this.loading = true
+        // const res = await get_itemList(this.start, this.take)
       let res = {}
       await new Promise((resolve, reject) => {
         setTimeout(() => {
