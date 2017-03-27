@@ -15,10 +15,13 @@ export class Entry extends Component {
   componentDidMount() {
     init().then(__store => {
       global.store = __store
-      get_token().then(() => {
-        setTimeout(() => {
-          this.setState({ store: __store })
-        })
+        // get_token().then(() => {
+        //   setTimeout(() => {
+        //     this.setState({ store: __store })
+        //   })
+        // })
+      setTimeout(() => {
+        this.setState({ store: __store })
       })
     }).catch((e) => {
       console.log(e)
