@@ -15,12 +15,12 @@ export const Routes = {
       return require('./Tabs').Tabs
     }
   },
-  Example: {
-    name: 'Example',
-    Title: '测试',
+  Login: {
+    name: 'Login',
+    Title: '登录',
     Inverse: true,
     get Comp() {
-      return require('./Example').Example
+      return require('./Login').Login
     }
   }
 }

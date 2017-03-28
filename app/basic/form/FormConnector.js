@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
+
 import { Keyboard } from "react-native"
 import { Form } from "./Form"
+
 import { form_connector } from "./form_connector"
 
+
 export class FormConnector extends Component {
+
   constructor(props) {
     super()
     this.form = new Form(props.validate, props.submit)
+
     this.state = {
       fields: this.form.createFields(props.fields)
     }
@@ -15,6 +20,7 @@ export class FormConnector extends Component {
     }
   }
 
+
   componentDidMount() {
     this.form.registerChangeEventHandler(this._changeHandler.bind(this))
     this.form.registerErrorHandler(this._errorHandler.bind(this))
@@ -22,7 +28,9 @@ export class FormConnector extends Component {
     if (this.props.onChange) {
       this.props.onChange(this.form.getData())
     }
+
   }
+
 
   componentWillUnmount() {
     this.form.removeChangeEventHandler(this._changeHandler.bind(this))
@@ -42,13 +50,16 @@ export class FormConnector extends Component {
     })
   }
 
+
   _changeHandler(name, value, fields) {
     this.setState({
       fields
     }, (() => {
+
       if (this.props.onChange) {
         this.props.onChange(this.form.getData())
       }
+
     }).bind(this))
   }
 
@@ -56,11 +67,14 @@ export class FormConnector extends Component {
     return this.form
   }
 
+
   _submit() {
+
     this.form.validate()
     const errors = this.form.getErrors()
     const data = this.form.getData()
     Keyboard.dismiss()
+
     this.props.submit && this.props.submit(data, errors)
   }
 
@@ -69,6 +83,8 @@ export class FormConnector extends Component {
     const { fields } = this.state
     return React.cloneElement(children, {...others, fields, form: this.form, submit: this._submit.bind(this) })
   }
+
+
 }
 
 const assert = (prop, predicate, errorMessage) => {

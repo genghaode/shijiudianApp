@@ -13,3 +13,7 @@ export const get_token = async(force) => {
 export const get_itemList = async(start, take) => {
   return await http_get('/api/itemList', { start, take })
 }
+
+export const login = (data) => {
+  return http_get('/api/login', data)
+}

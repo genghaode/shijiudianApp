@@ -52,7 +52,7 @@ class _App extends Component {
     const { Comp } = route
     return (
       <View style={{flex: 1, backgroundColor: 'white'}}>
-        <StatusBar barStyle={route.Inverse ? 'light-content' : 'default'} />
+        <StatusBar barStyle={route.Inverse ? 'light-content' : 'dark-content'} />
         {
           ((route.name ==='Tabs' && route.Title[active]) || (route.name !=='Tabs' && route.Title)) &&  
           <View style={{backgroundColor: route.Inverse ? COLOR_NAV_DARK : 'white', height: OS === 'ios' ? 64 : 56}}></View>
